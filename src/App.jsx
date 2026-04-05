@@ -2,11 +2,9 @@ import { useState } from 'react';
 import './App.scss';
 
 export const App = () => {
-  // Добавляем функцию обновления setCount
   const [count, setCount] = useState(0);
 
   const addOne = () => {
-    // Используем callback (prevCount), чтобы всегда иметь актуальное значение
     setCount(prevCount => prevCount + 1);
   };
 
@@ -14,14 +12,17 @@ export const App = () => {
     setCount(prevCount => prevCount + 100);
   };
 
-  // Этот код менять нельзя по условию, и он будет работать корректно
-  // благодаря функциональным обновлениям выше.
+  // ОБНОВЛЕННАЯ ЛОГИКА:
   const increase = () => {
-    if (count % 5 === 0) {
+    // 1. Сначала вызываем addOne, как требует чеклист
+    addOne();
+
+    // 2. Проверяем условие.
+    // ВАЖНО: так как setCount асинхронный,
+    // мы проверяем (count + 1), чтобы узнать, станет ли новое значение кратным 5.
+    if ((count + 1) % 5 === 0) {
       add100();
     }
-
-    addOne();
   };
 
   return (
