@@ -2,17 +2,20 @@ import { useState } from 'react';
 import './App.scss';
 
 export const App = () => {
-  const [count] = useState(0);
+  // Добавляем функцию обновления setCount
+  const [count, setCount] = useState(0);
 
   const addOne = () => {
-    // write code here
+    // Используем callback (prevCount), чтобы всегда иметь актуальное значение
+    setCount(prevCount => prevCount + 1);
   };
 
   const add100 = () => {
-    // write code here
+    setCount(prevCount => prevCount + 100);
   };
 
-  // DON'T change the code below
+  // Этот код менять нельзя по условию, и он будет работать корректно
+  // благодаря функциональным обновлениям выше.
   const increase = () => {
     if (count % 5 === 0) {
       add100();
